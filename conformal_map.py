@@ -1,38 +1,64 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
-# define function
+# Define the function f(z)
 def f(z):
-    return np.exp(z)
+    return z**2  # Replace with your function
 
-# define domain
-lim = 3
-n = 300
-Xv = np.linspace(-lim, lim, n)
-Yv = np.linspace(-lim, lim, n)
-X, Y = np.meshgrid(Xv, Yv)
+# Define ranges and create grid lines
+x_range = np.linspace(-2, 2, 100)
+y_range = np.linspace(-2, 2, 100)
 
-# get values of f
-Z = X + 1j * Y
-Fv = f(Z)
-lv = np.linspace(-10,10,21)
+x_lines = np.linspace(-2, 2, 9)  # 9 vertical lines
+y_lines = np.linspace(-2, 2, 9)  # 9 horizontal lines
 
-fig, (ax, ax2) = plt.subplots(1,2, figsize = (10,5))
-fig.suptitle(r"$f(z)=e^z$", fontsize=18)
-ax.set_aspect("equal")
-ax2.set_aspect("equal")
+x_line_values = np.linspace(-2, 2, 100)
+y_line_values = np.linspace(-2, 2, 100)
 
-ax.contour(Xv, Yv, X, colors="blue", linestyles="solid", levels=lv, linewidths=1)
-ax.contour(Xv, Yv, Y, colors="red", linestyles="solid", levels=lv, linewidths=1)
-ax.set_xlabel("$Re$ $Z$", fontsize=14)
-ax.set_ylabel("$Im$ $Z$", fontsize=14)
-ax.set_title("Before")
+# Prepare lists to store mapped lines
+mapped_vertical_lines = []
+mapped_horizontal_lines = []
 
-ax2.contour(Xv, Yv, np.real(Fv), colors="blue", linestyles="solid", levels=lv, linewidths=1)
-ax2.contour(Xv, Yv, np.imag(Fv), colors="red", linestyles="solid", levels=lv, linewidths=1)
-ax2.set_xlabel("$Re$ $Z$", fontsize=14)
-ax2.set_ylabel("$Im$ $Z$", fontsize=14)
-ax2.set_title("After")
+# Map vertical lines (x = constant)
+for x0 in x_lines:
+    z_points = x0 + 1j * y_line_values
+    w_points = f(z_points)
+    mapped_vertical_lines.append((w_points.real, w_points.imag))
 
-plt.subplots_adjust(wspace=0.5)
+# Map horizontal lines (y = constant)
+for y0 in y_lines:
+    z_points = x_line_values + 1j * y0
+    w_points = f(z_points)
+    mapped_horizontal_lines.append((w_points.real, w_points.imag))
+
+# Plotting
+plt.figure(figsize=(14, 6))
+
+# z-plane plot
+plt.subplot(1, 2, 1)
+for x0 in x_lines:
+    plt.plot(np.full_like(y_line_values, x0), y_line_values, color='blue', linewidth=0.5)
+for y0 in y_lines:
+    plt.plot(x_line_values, np.full_like(x_line_values, y0), color='blue', linewidth=0.5)
+
+plt.title('z-plane')
+plt.xlabel('Re(z)')
+plt.ylabel('Im(z)')
+plt.axis('equal')
+plt.grid(True)
+
+# w-plane plot
+plt.subplot(1, 2, 2)
+for x, y in mapped_vertical_lines:
+    plt.plot(x, y, color='red', linewidth=0.5)
+for x, y in mapped_horizontal_lines:
+    plt.plot(x, y, color='red', linewidth=0.5)
+
+plt.title('w-plane')
+plt.xlabel('Re(w)')
+plt.ylabel('Im(w)')
+plt.axis('equal')
+plt.grid(True)
+
+plt.tight_layout()
 plt.show()
