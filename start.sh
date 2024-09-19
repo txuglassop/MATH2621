@@ -7,11 +7,11 @@ if [ -z "$1" ]; then
 fi
 
 # Determine which script to run based on the argument
-if [ "$1" == "line" ]; then
+if [ "$1" == "l" ]; then
     python3 plot_line.py
-elif [ "$1" == "circle" ]; then
+elif [ "$1" == "c" ]; then
     python3 plot_circles.py
 else
-    echo "Invalid argument. Use 'line' or 'circle'."
+    echo "Invalid argument. Use 'l' for 'line' or 'c' for 'circle'."
     exit 1
 fi
