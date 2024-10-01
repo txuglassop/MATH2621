@@ -3,19 +3,18 @@ import matplotlib.pyplot as plt
 
 # Define the function f(z)
 def f(z):
-    return np.exp(z)
+    return np.sqrt(z)
 
-# Define ranges and create grid lines
+# Define ranges
 x_range = np.linspace(-2, 2, 100)
 y_range = np.linspace(-2, 2, 100)
 
-x_lines = np.linspace(-2, 2, 9)  # 9 vertical lines
-y_lines = np.linspace(-2, 2, 9)  # 9 horizontal lines
+x_lines = np.linspace(-2, 2, 9) 
+y_lines = np.linspace(-2, 2, 9)
 
 x_line_values = np.linspace(-2, 2, 100)
 y_line_values = np.linspace(-2, 2, 100)
 
-# Prepare lists to store mapped lines
 mapped_vertical_lines = []
 mapped_horizontal_lines = []
 
@@ -34,7 +33,6 @@ for y0 in y_lines:
 # Plotting
 plt.figure(figsize=(14, 6))
 
-# z-plane plot
 plt.subplot(1, 2, 1)
 for x0 in x_lines:
     plt.plot(np.full_like(y_line_values, x0), y_line_values, color='blue', linewidth=0.5)
@@ -47,7 +45,6 @@ plt.ylabel('Im(z)')
 plt.axis('equal')
 plt.grid(True)
 
-# w-plane plot
 plt.subplot(1, 2, 2)
 for x, y in mapped_vertical_lines:
     plt.plot(x, y, color='blue', linewidth=0.5)
