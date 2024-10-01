@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 
 # Define the function f(z)
 def f(z):
-    return z / (z + 2) # Replace with your function
+    return np.exp(z)
 
 # Define centre x_coord and y_coord and radius r
 x_co = 0
 y_co = 0
-r = 1
+r = 2
 
 
 # Function to plot transformed circle
@@ -35,7 +35,6 @@ def plot_transformed_circle(h, k, r, f, color='green', label=None):
 
 plt.figure(figsize=(14, 6))
 
-# z-plane plot setup
 plt.subplot(1, 2, 1)
 plt.title('z-plane')
 plt.xlabel('Re(z)')
@@ -43,7 +42,6 @@ plt.ylabel('Im(z)')
 plt.axis('equal')
 plt.grid(True)
 
-# w-plane plot setup
 plt.subplot(1, 2, 2)
 plt.title('w-plane')
 plt.xlabel('Re(w)')
@@ -51,7 +49,6 @@ plt.ylabel('Im(w)')
 plt.axis('equal')
 plt.grid(True)
 
-# Plot the circle specified at top of the file
 plot_transformed_circle(h=x_co, k=y_co, r=r, f=f, color='green', label='|z - 1| = 1')
 
 plt.tight_layout()
