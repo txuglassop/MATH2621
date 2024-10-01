@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 # Define the function f(z)
 def f(z):
-    return z**2  # Replace with your function
+    return np.exp(z)
 
 # Define ranges and create grid lines
 x_range = np.linspace(-2, 2, 100)
@@ -39,7 +39,7 @@ plt.subplot(1, 2, 1)
 for x0 in x_lines:
     plt.plot(np.full_like(y_line_values, x0), y_line_values, color='blue', linewidth=0.5)
 for y0 in y_lines:
-    plt.plot(x_line_values, np.full_like(x_line_values, y0), color='blue', linewidth=0.5)
+    plt.plot(x_line_values, np.full_like(x_line_values, y0), color='red', linewidth=0.5)
 
 plt.title('z-plane')
 plt.xlabel('Re(z)')
@@ -50,7 +50,7 @@ plt.grid(True)
 # w-plane plot
 plt.subplot(1, 2, 2)
 for x, y in mapped_vertical_lines:
-    plt.plot(x, y, color='red', linewidth=0.5)
+    plt.plot(x, y, color='blue', linewidth=0.5)
 for x, y in mapped_horizontal_lines:
     plt.plot(x, y, color='red', linewidth=0.5)
 
